@@ -8,6 +8,8 @@ Meta transactions are also commonly used for gas-less transaction experiences, f
 
 There are other use cases as well, for example letting users pay for gas fees with any token, or even fiat without needing to convert to crypto. Multisig wallets also only ask the last signer to pay gas for the transaction being made from the multisig wallet, and the other users just sign some messages.
 
+<Quiz questionId="bcec76d7-5dc6-427b-9f71-b59326392011" />
+
 Isn't this really cool? 🎉
 
 ## How does it work?
@@ -17,6 +19,8 @@ Meta transactions are just a fancy word for transactions where a third party (a 
 Relayers could be, for example, code in your dApp to let your users experience gas-less transactions, or it could be a third-party company that you pay in fiat to execute transactions on Ethereum, etc.
 
 At this level, we will do two things - learn about meta transactions and how to build a simple smart contract that supports meta transactions, and also learn about a security bug in the first contract we build and how to fix it. Kill two birds with one stone 😎.
+
+<Quiz questionId="c6070fb4-8b11-4d4b-b906-9a46ff61b595" />
 
 ## Digital Signatures
 
@@ -33,6 +37,8 @@ So in the example above, Alice signs the message `Hello Bob!` using her private 
 #### Use Cases of Digital Signatures
 
 Digital signatures are commonly used when wanting to communicate securely and ensuring that the contents of the messages were not manipulated during communication. You can send the original plaintext message, along with a signed message from a known sender, and the receiver can verify the integrity of the message by deriving the public key of the signer by comparing the plaintext message and the signed message. If the public key of the signer matches the public key of the expected sender, the message was transmitted securely!
+
+<Quiz questionId="496f9c89-4f05-4e33-be0c-f41316506e75" />
 
 #### Digital Signatures on Ethereum
 
@@ -149,6 +155,8 @@ The `ERC20.sol` import is to inherit the base ERC-20 contract implementation fro
 
 `ECDSA` stands for `Elliptic Curve Digital Signature Algorithm` - it is the signatures algorithm used by Ethereum, and the OpenZeppelin library for `ECDSA.sol` contains some helper functions used for digital signatures in Solidity.
 
+<Quiz questionId="69e7ff0a-c10f-4e4d-a089-3cf6e0e72567" />
+
 #### The Functions
 
 The ERC-20 contract is quite self-explanatory, as all it does is let you mint an arbitrary amount of free tokens.
@@ -249,6 +257,8 @@ describe("MetaTokenTransfer", function () {
 });
 ```
 
+<Quiz questionId="3bef2843-5002-4a73-8924-d3a04c541634" />
+
 The code is explained in the comments, but let's try running the test. You can type
 `npx hardhat test` in your terminal to run the tests, and if you did everything correctly, it should pass!
 
@@ -265,6 +275,8 @@ While this may not seem like a big deal in this specific example, what if this c
 Instead, the transaction should only be executed when the user explicitly provides a second signature (while staying within the rules of the smart contract, of course).
 
 This attack is called **Signature Replay** - because, well you guessed it, you're replaying a signature.
+
+<Quiz questionId="833e99af-4507-41c6-b2cc-a0c0b743f7ea" />
 
 ## Solving for Signature Replay
 
@@ -539,6 +551,8 @@ If you run `npx hardhat test` here - you will see the first test passes, but the
 
 This shows that signature replay can no longer happen, and the vulnerability is secured! 🥳🥳
 
+<Quiz questionId="bc67a5b6-844c-4028-ab38-db49e9d4d0f8" />
+
 ## Conclusion
 
 This turned out to be a longer level than I was expecting, but I hope you learned something cool! Meta transactions are a great utility tool to have in your belt, but make sure you implement them properly.
@@ -546,3 +560,5 @@ This turned out to be a longer level than I was expecting, but I hope you learne
 As always, feel free to ask on Discord if you have any questions or need help, we will be more than happy to help you!
 
 Ciao, WAGMI! 🚀🚀🚀
+
+<SubmitQuiz />
