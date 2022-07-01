@@ -169,14 +169,14 @@ describe("MetaTokenTransfer", function () {
     await metaTxn.wait();
 
     // Have the relayer attempt to execute the same transaction again with the same signature
-    const metaTxn2 = await relayerSenderContractInstance.transfer(
+    // This time, we expect the transaction to be reverted because the signature has already been used.
+    expect(relayerSenderContractInstance.transfer(
       userAddress.address,
       transferAmountOfTokens,
       recipientAddress.address,
       randomTokenContract.address,
       nonce,
       signature
-    );
-    await metaTxn2.wait();
+    )).to.be.revertedWith('Already executed!');
   });
 });

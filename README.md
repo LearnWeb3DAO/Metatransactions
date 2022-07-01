@@ -532,22 +532,22 @@ describe("MetaTokenTransfer", function () {
     await metaTxn.wait();
 
     // Have the relayer attempt to execute the same transaction again with the same signature
-    const metaTxn2 = await relayerSenderContractInstance.transfer(
+    // This time, we expect the transaction to be reverted because the signature has already been used.
+    expect(relayerSenderContractInstance.transfer(
       userAddress.address,
       transferAmountOfTokens,
       recipientAddress.address,
       randomTokenContract.address,
       nonce,
       signature
-    );
-    await metaTxn2.wait();
+    )).to.be.revertedWith('Already executed!');
   });
 });
 ```
 
-The first test here has the user sign two distinct signatures with two distinct nonces, and the relayer executes them both. In the second test, however, the relayer attempts to execute the same signature twice.
+The first test here has the user sign two distinct signatures with two distinct nonces, and the relayer executes them both. In the second test, however, the relayer attempts to execute the same signature twice. The second time the relayer tries to use the same signature, we expect the transaction to revert.
 
-If you run `npx hardhat test` here - you will see the first test passes, but the second one fails!
+If you run `npx hardhat test` here and all tests succeed, that means that the second transaction with the replay attack was reverted.
 
 This shows that signature replay can no longer happen, and the vulnerability is secured! 🥳🥳
 
